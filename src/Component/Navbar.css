@@ -1,0 +1,75 @@
+nav{
+    height: 4rem;
+    width: 60%;
+    background-color: rgba(239, 235, 230, 0.233);
+    position: relative;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%);
+    border-radius: 17px;
+
+}
+
+nav>ul{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    gap: 4rem;
+    transform: translate(5.3rem);
+}
+
+nav>ul>li>a{
+    color: white;
+    text-decoration: none;
+}
+.flow{
+    position: relative;
+}
+.flow::before{
+    content: '';
+    height: 2.9px;
+    width: 0;
+    position: absolute;
+    background-color: white;
+    border-radius: 14px;
+    bottom: -0.2rem;
+    transition: all 300ms ease-in-out;
+}
+
+#login{
+    background-color: black;
+    color: white;
+    height: 50px;
+    width: 70px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 17px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+#login::before{
+    content: '';
+    position: absolute;
+    background-color: rgba(97, 18, 176, 0.67);
+    height: 100%;
+    width: 0%;
+    transition: width 300ms ease-out;
+    left: 0;
+    z-index: -1;
+}
+
+#login:hover::before{
+    width: 100%;
+    
+}
+
+.flow:hover::before{
+    width: 100%;
+}
