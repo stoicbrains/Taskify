@@ -1,8 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Todo.css';
 import axios from 'axios';
+import { useAnimation, useInView,motion, easeOut } from 'framer-motion';
 
 function Todo() {
+  const ref = useRef(null);
+  const inView = useInView(ref,{once:true});
+  const controls = useAnimation();
+  const variants={hidden:{opacity:0,x:-500},
+visible:{opacity:1,x:0}};
   const [Title, setTitle] = useState('');
   const [Desc, setDesc] = useState('');
   const [List, setList] = useState([]);
@@ -26,7 +32,11 @@ function Todo() {
       });
     }
   }, [token, user]);
-
+  useEffect(()=>{
+    if(inView){
+      controls.start('visible');
+    }
+  },[inView,controls])
   const OnTitleChange = (event) => {
     setTitle(event.target.value);
   };
@@ -114,8 +124,8 @@ function Todo() {
   };
 
   return (
-    <div className="App">
-      <div className="maincontainer">
+    <motion.div className="App" ref={ref} initial='hidden' variants={variants} animate={controls} transition={{delay:0.3,duration:0.6,ease:easeOut}}>
+      <motion.div className="maincontainer">
         <div className='formContainer'>
           <form onSubmit={OnSubmit} className="form">
             <input
@@ -188,8 +198,8 @@ function Todo() {
             ))}
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
